@@ -21,8 +21,8 @@ class YourModel < ApplicationRecord
 end
 
 UuidAttribute.setup do |config|
-  # Configure generators to use UUID as primary key
-  config.default_primary_id = false
+  # Configure generators to use UUID as primary key (defaults to true)
+  config.default_primary_id = true
 end
 ```
 
