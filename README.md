@@ -44,4 +44,7 @@ https://github.com/heartcombo/simple_form/tree/main/gemfiles
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/pnegri/activerecord-uuid-attribute.
+Bug reports and pull requests are welcome on GitHub at
+https://github.com/pnegri/activerecord-uuid-attribute.
+
+You can connect to discuss at our Discord server: https://discord.gg/nWthPyD7rh
