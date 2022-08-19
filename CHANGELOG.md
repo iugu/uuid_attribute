@@ -1,7 +1,5 @@
 ## Unreleased
 
-* Coding
+## 0.1.1 - 2022-08-19
 
-## 0.0.1 - 2022-08-19
-
-* Initial release template
+* First public release
