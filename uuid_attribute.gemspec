@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.email = ["patrick@iugu.com"]
   spec.license = "MIT"
 
-  spec.summary = "Write a short summary, because RubyGems requires one."
-  spec.description = "Another one"
+  spec.summary = "UUID attribute for ActiveRecord"
+  spec.description = "UUID attribute for ActiveRecord"
   spec.homepage = "https://github.com/iugu/activerecord-uuid-attribute"
   spec.required_ruby_version = ">= 2.6.0"
   spec.metadata = {
