@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    uuid_attribute (0.1.1)
+    uuid_attribute (0.1.2)
       activemodel (>= 5.2)
 
 GEM
