@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.version = UUID::Attribute::VERSION
   spec.authors = ["Patrick Negri"]
   spec.email = ["patrick@iugu.com"]
-  spec.license     = "MIT"
+  spec.license = "MIT"
 
   spec.summary = "Write a short summary, because RubyGems requires one."
   spec.description = "Another one"
