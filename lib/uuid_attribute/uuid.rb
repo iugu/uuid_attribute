@@ -15,10 +15,6 @@ module UuidAttribute
       )
     end
 
-    def type_cast_for_schema(value)
-      super
-    end
-
     def deserialize(value)
       return nil if value.nil?
 

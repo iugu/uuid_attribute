@@ -53,7 +53,7 @@ module UuidAttribute
           out.unshift(alphabet[i % radix])
           i /= radix
         end
-        out.join
+        out.join.rjust(22, "0")
       end
 
       def unshort(word, alphabet = DEFAULT_BASE62)
@@ -63,7 +63,7 @@ module UuidAttribute
           num += alphabet.index(char) * (radix**index)
         end
 
-        uuid = num.to_s(16).rjust(32, '0')
+        uuid = num.to_s(16).rjust(32, "0")
         [
           uuid[0..7],
           uuid[8..11],
