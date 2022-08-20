@@ -1,14 +1,14 @@
-# UUID::Attribute
+# UUidAttribute
 
 ## Installation
 
 Install the gem and add to the application's Gemfile by executing:
 
-    $ bundle add activerecord-uuid-attribute
+    $ bundle add uuid_attribute
 
 If bundler is not being used to manage dependencies, install the gem by executing:
 
-    $ gem install activerecord-uuid-attribute
+    $ gem install uuid_attribute
 
 ## Usage
 
@@ -16,13 +16,18 @@ TODO: Write usage instructions here
 
 ```
 class YourModel < ApplicationRecord
-  # Need to put attribute manually
   attribute :id, :uuid, default: -> { SecureRandom.uuid }
 end
 
+Or if you want to disable auto detect of UUIDs
+
 UuidAttribute.setup do |config|
   # Configure generators to use UUID as primary key (defaults to true)
-  config.default_primary_id = true
+  config.auto_detect_binary_ids = false
+end
+
+class YourModel < ApplicationRecord
+  attribute :id, :uuid, default: -> { SecureRandom.uuid }
 end
 ```
 
