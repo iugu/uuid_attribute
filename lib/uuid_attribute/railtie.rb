@@ -13,9 +13,9 @@ module UuidAttribute
         field_info.type == :binary && field_info.limit == 16
       end
 
-      def binary16?(field)
-        field_info = self.class.attribute_types[field]
-        binary16_structure?(field_info) && respond_to?("#{field}?")
+      def binary16?(klass, field)
+        field_info = klass.attribute_types[field]
+        binary16_structure?(field_info) && klass.method_defined?("#{field}?")
       end
 
       def valid_default_rails_ids?(att)
@@ -38,14 +38,30 @@ end
 =end
 
     config.after_initialize do
-      # unless SimpleForm.configured?
-      #  warn '[Simple Form] Simple Form is not configured in the application and will use the default values.' +
-      #    ' Use `rails generate simple_form:install` to generate the Simple Form configuration.'
-      # end
-
       ActiveRecord::Type.register(:uuid, ::UuidAttribute::UUID)
 
-      ActiveRecord::Base.include ::UuidAttribute::ActiveModel if defined? ActiveRecord::Base
+      if UuidAttribute.auto_detect_binary_ids
+        models = []
+        Dir["#{Rails.root}/app/models/*"].each do |file|
+          model = File.basename(file, ".*").classify
+          models << model unless models.include?(model)
+        end
+
+        models -= %w[ActiveRecord Concern]
+
+        models.each do |model|
+          model = model.constantize
+          model.attribute_names.each do |att|
+            next unless valid_default_rails_ids?(att) && binary16?(model, att)
+
+            default = nil
+            default = -> { SecureRandom.uuid } if att.eql? "id"
+            model.define_attribute att, ::UuidAttribute::UUID.new, default: default
+          end
+        end
+      end
+
+      # ActiveRecord::Base.include ::UuidAttribute::ActiveModel if defined? ActiveRecord::Base
 
       if UuidAttribute.default_primary_id
         # Configure UUID as Default Primary Key
