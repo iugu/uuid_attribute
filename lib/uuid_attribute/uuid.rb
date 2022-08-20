@@ -22,9 +22,7 @@ module UuidAttribute
     end
 
     def cast(value)
-      return if value.nil?
-
-      Utils.shorten(Utils.parse(value.to_s))
+      deserialize(value)
     end
   end
 end

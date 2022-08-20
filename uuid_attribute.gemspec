@@ -25,6 +25,6 @@ Gem::Specification.new do |spec|
   spec.test_files    = Dir["test/**/*.rb"]
   spec.require_paths = ["lib"]
 
-  # spec.add_dependency "example-gem", "~> 1.0"
   spec.add_dependency("activemodel", ">= 5.2")
+  spec.add_dependency("activerecord", ">= 5.2")
 end

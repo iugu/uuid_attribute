@@ -9,11 +9,7 @@ module UuidAttribute
       end
 
       def hex_from_binary(bytes)
-        bytes.unpack1("H*")
-      end
-
-      def mysql_value(value)
-        "x'#{value}'"
+        normalize(bytes.unpack1("H*"))
       end
 
       def raw_bytes(uuid_string)
@@ -22,13 +18,14 @@ module UuidAttribute
 
       def parse(str)
         return nil if str.length.zero?
+        return str if str.length == 36
 
         case str.length
-        when 36
-          normalize(str)
+        when 32
+          format_uuid(str)
         when 16
-          normalize(hex_from_binary(str))
-        when 20, 21, 22
+          format_uuid(hex_from_binary(str))
+        when 22
           unshort(str)
         end
       end
@@ -39,11 +36,23 @@ module UuidAttribute
         a b c d e f g h i j k l m n o p q r s t u v w x y z
       ].freeze
 
+      def format_uuid(uuid)
+        # TODO: Maybe raise a exception?
+        return uuid if uuid.length != 32
+
+        uuid = uuid.downcase
+        [
+          uuid[0..7],
+          uuid[8..11],
+          uuid[12..15],
+          uuid[16..19],
+          uuid[20..31]
+        ].join("-")
+      end
+
       def shorten(decimal, alphabet = DEFAULT_BASE62)
-        alphabet = alphabet.to_a
         radix = alphabet.length
-        normalized_decimal = normalize(decimal).to_i(16)
-        i = normalized_decimal.to_i
+        i = normalize(decimal).to_i(16).to_i
         out = []
         return alphabet[0] if i.zero?
 
@@ -64,13 +73,7 @@ module UuidAttribute
         end
 
         uuid = num.to_s(16).rjust(32, "0")
-        [
-          uuid[0..7],
-          uuid[8..11],
-          uuid[12..15],
-          uuid[16..19],
-          uuid[20..31]
-        ].join("-")
+        format_uuid(uuid)
       end
     end
   end
