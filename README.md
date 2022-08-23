@@ -41,12 +41,6 @@ release a new version, update the version number in `version.rb`, and then run
 git commits and the created tag, and push the `.gem` file to
 [rubygems.org](https://rubygems.org).
 
-## TODO
-
-Write tests for each supported rails versions. See examples at:
-https://github.com/rails/rails/tree/main/activerecord
-https://github.com/heartcombo/simple_form/tree/main/gemfiles
-
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at
