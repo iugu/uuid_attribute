@@ -12,12 +12,14 @@ If bundler is not being used to manage dependencies, install the gem by executin
 
 ## Usage
 
-TODO: Write usage instructions here
-
 ```
 class YourModel < ApplicationRecord
-  attribute :id, :uuid, default: -> { SecureRandom.uuid }
 end
+
+model = YourModel.create( ... )
+YourModel:0x00007f85774135a8  
+ id: "5iLEaLFZUeD6Dg8nnfSiCZ",
+... > 
 
 Or if you want to disable auto detect of UUIDs
 
