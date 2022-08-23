@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.summary = "UUID attribute for ActiveRecord"
   spec.description = "UUID attribute for ActiveRecord"
   spec.homepage = "https://github.com/iugu/uuid_attribute"
-  spec.required_ruby_version = ">= 2.6.0"
+  spec.required_ruby_version = ">= 2.5.0"
   spec.metadata = {
     "homepage_uri"      => "https://github.com/iugu/uuid_attribute",
     "documentation_uri" => "https://github.com/iugu/uuid_attribute",
