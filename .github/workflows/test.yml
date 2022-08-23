@@ -21,10 +21,17 @@ jobs:
     runs-on: ubuntu-latest
     env: # $BUNDLE_GEMFILE must be set at the job level, so it is set for all steps
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: 
+        ports:
+        - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
       - name: Set up MySQL
         run: |
-          sudo /etc/init.d/mysql start
           mysql -e 'CREATE DATABASE uuid_attribute_tests' -u root
       - uses: actions/checkout@v2
       - uses: ruby/setup-ruby@v1
