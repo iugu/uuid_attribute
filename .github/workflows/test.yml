@@ -34,7 +34,7 @@ jobs:
     steps:
       - name: Set up MySQL
         run: |
-          mysql -e 'CREATE DATABASE uuid_attribute_tests' -u root
+          mysql -e 'CREATE DATABASE uuid_attribute_tests' -u root -h 127.0.0.1
       - uses: actions/checkout@v2
       - uses: ruby/setup-ruby@v1
         with:
