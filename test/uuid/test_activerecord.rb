@@ -14,7 +14,7 @@ module UUID
     def setup
       UuidAttribute::Railtie.config.after_initialize.each do |block|
         next unless block && block[0]
-        next unless block[0].source_location[0].include? "uuid_attribute"
+        next unless block[0].source_location[0].include? "uuid_attribute/railtie.rb"
 
         block[0].call
       end
