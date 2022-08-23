@@ -35,7 +35,7 @@ jobs:
         image: postgres:10.10
         env:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_PASSWORD: 
           POSTGRES_DB: uuid_attribute_tests
         ports:
           - 5432:5432
