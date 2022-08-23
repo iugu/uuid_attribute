@@ -22,7 +22,7 @@ module UuidAttribute
         att.eql?("id") || att.end_with?("_id")
       end
 
-      def configure_binary_ids
+      def list_models
         models = []
         Dir["#{Rails.root}/app/models/*"].each do |file|
           model = File.basename(file, ".*").classify
@@ -30,8 +30,10 @@ module UuidAttribute
         end
 
         models -= %w[ActiveRecord Concern]
+      end
 
-        models.each do |model|
+      def configure_binary_ids
+        list_models.each do |model|
           model = model.constantize
           model.attribute_names.each do |att|
             next unless valid_default_rails_ids?(att) && binary16?(model, att)
@@ -47,9 +49,7 @@ module UuidAttribute
     config.after_initialize do
       ActiveRecord::Type.register(:uuid, ::UuidAttribute::UUID)
 
-      if UuidAttribute.auto_detect_binary_ids
-        configure_binary_ids
-      end
+      configure_binary_ids if UuidAttribute.auto_detect_binary_ids
 
       if UuidAttribute.default_primary_id
         # Configure UUID as Default Primary Key
