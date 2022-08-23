@@ -15,3 +15,5 @@ connections:
   postgresql:
     database: uuid_attribute_tests
     adapter: postgresql
+    host: 127.0.0.1
+    port: 5432
