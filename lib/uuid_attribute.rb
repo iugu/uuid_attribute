@@ -2,6 +2,7 @@
 
 require "active_model"
 require "active_model/type"
+require "rails"
 require_relative "uuid_attribute/version"
 require_relative "uuid_attribute/uuid"
 require_relative "uuid_attribute/utils"

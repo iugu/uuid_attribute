@@ -9,13 +9,14 @@ module UuidAttribute
     config.eager_load_namespaces << ::UuidAttribute
 
     class << self
-      def binary16_structure?(field_info)
-        field_info.type == :binary && field_info.limit == 16
+      def binary_structure?(field_info)
+        field_info.type == :binary
       end
 
-      def binary16?(klass, field)
+      def binary?(klass, field)
         field_info = klass.attribute_types[field]
-        binary16_structure?(field_info) && klass.method_defined?("#{field}?")
+        binary_structure?(field_info)
+        # && klass.method_defined?("#{field}?")
       end
 
       def valid_default_rails_ids?(att)
@@ -30,13 +31,19 @@ module UuidAttribute
         end
 
         models -= %w[ActiveRecord Concern]
+
+        models.each(&:constantize)
+        all_active_record_classes
+      end
+
+      def all_active_record_classes
+        ObjectSpace.each_object(Class).select { |c| c < ActiveRecord::Base }.select(&:name)
       end
 
       def configure_binary_ids
         list_models.each do |model|
-          model = model.constantize
           model.attribute_names.each do |att|
-            next unless valid_default_rails_ids?(att) && binary16?(model, att)
+            next unless valid_default_rails_ids?(att) && binary?(model, att)
 
             default = nil
             default = -> { SecureRandom.uuid } if att.eql? "id"
@@ -53,7 +60,7 @@ module UuidAttribute
 
       if UuidAttribute.default_primary_id
         # Configure UUID as Default Primary Key
-        Rails.application.config.generators do |g|
+        Rails&.application&.config&.generators do |g|
           g.orm :active_record, primary_key_type: "binary, limit: 16"
         end
       end
