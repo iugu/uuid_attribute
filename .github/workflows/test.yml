@@ -32,9 +32,6 @@ jobs:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
-      - name: Set up MySQL
-        run: |
-          mysql -e 'CREATE DATABASE uuid_attribute_tests' -u root -h 127.0.0.1
       - uses: actions/checkout@v2
       - uses: ruby/setup-ruby@v1
         with:
