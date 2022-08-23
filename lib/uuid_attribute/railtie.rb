@@ -21,26 +21,8 @@ module UuidAttribute
       def valid_default_rails_ids?(att)
         att.eql?("id") || att.end_with?("_id")
       end
-    end
 
-=begin
-all_models = ObjectSpace.each_object(Class).select { |c| c < ApplicationRecord}.select(&:name)
-all_models.each do |model|
-  puts model
-  model.attribute_names.each do |att|
-    next unless valid_default_rails_ids?(att) && binary16?(att)
-
-    default = nil
-    default = -> { SecureRandom.uuid } if att.eql? "id"
-    self.class.define_attribute att, ::UuidAttribute::UUID.new, default: default
-  end
-end
-=end
-
-    config.after_initialize do
-      ActiveRecord::Type.register(:uuid, ::UuidAttribute::UUID)
-
-      if UuidAttribute.auto_detect_binary_ids
+      def configure_binary_ids
         models = []
         Dir["#{Rails.root}/app/models/*"].each do |file|
           model = File.basename(file, ".*").classify
@@ -60,8 +42,14 @@ end
           end
         end
       end
+    end
 
-      # ActiveRecord::Base.include ::UuidAttribute::ActiveModel if defined? ActiveRecord::Base
+    config.after_initialize do
+      ActiveRecord::Type.register(:uuid, ::UuidAttribute::UUID)
+
+      if UuidAttribute.auto_detect_binary_ids
+        configure_binary_ids
+      end
 
       if UuidAttribute.default_primary_id
         # Configure UUID as Default Primary Key

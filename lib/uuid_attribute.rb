@@ -4,7 +4,6 @@ require "active_model"
 require "active_model/type"
 require_relative "uuid_attribute/version"
 require_relative "uuid_attribute/uuid"
-require_relative "uuid_attribute/active_model"
 require_relative "uuid_attribute/utils"
 
 # UUID::Attribute is a module that provides a UUID attribute for ActiveRecord
