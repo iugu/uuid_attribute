@@ -22,6 +22,10 @@ jobs:
     env: # $BUNDLE_GEMFILE must be set at the job level, so it is set for all steps
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
     steps:
+      - name: Set up MySQL
+        run: |
+          sudo /etc/init.d/mysql start
+          mysql -e 'CREATE DATABASE uuid_attribute_tests'
       - uses: actions/checkout@v2
       - uses: ruby/setup-ruby@v1
         with:

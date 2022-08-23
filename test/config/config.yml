@@ -1,0 +1,15 @@
+default_connection: 'sqlite3'
+
+connections:
+  mysql2:
+    database: uuid_attribute_tests
+    adapter: mysql2
+    username: root
+    encoding: utf8mb4
+    collation: utf8mb4_unicode_ci
+  sqlite3:
+    adapter: sqlite3
+    database: ./test/database.sqlite3
+  postgresql:
+    database: uuid_attribute_tests
+    adapter: postgresql

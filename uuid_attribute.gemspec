@@ -11,14 +11,14 @@ Gem::Specification.new do |spec|
 
   spec.summary = "UUID attribute for ActiveRecord"
   spec.description = "UUID attribute for ActiveRecord"
-  spec.homepage = "https://github.com/iugu/activerecord-uuid-attribute"
+  spec.homepage = "https://github.com/iugu/uuid_attribute"
   spec.required_ruby_version = ">= 2.6.0"
   spec.metadata = {
-    "homepage_uri"      => "https://github.com/iugu/activerecord-uuid-attribute",
-    "documentation_uri" => "https://rubydoc.info/github/iugu/simple_form/activerecord-uuid-attribute",
-    "changelog_uri"     => "https://github.com/iugu/activerecord-uuid-attribute/blob/main/CHANGELOG.md",
-    "source_code_uri"   => "https://github.com/iugu/activerecord-uuid-attribute",
-    "bug_tracker_uri"   => "https://github.com/iugu/activerecord-uuid-attribute/issues"
+    "homepage_uri"      => "https://github.com/iugu/uuid_attribute",
+    "documentation_uri" => "https://github.com/iugu/uuid_attribute",
+    "changelog_uri"     => "https://github.com/iugu/uuid_attribute/blob/main/CHANGELOG.md",
+    "source_code_uri"   => "https://github.com/iugu/uuid_attribute",
+    "bug_tracker_uri"   => "https://github.com/iugu/uuid_attribute/issues"
   }
 
   spec.files         = Dir["CHANGELOG.md", "LICENSE.md", "README.md", "lib/**/*"]
