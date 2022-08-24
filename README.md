@@ -1,10 +1,8 @@
-# UUidAttribute
-
 [![Maintainability](https://api.codeclimate.com/v1/badges/54be49d487b928c9bc8f/maintainability)](https://codeclimate.com/github/iugu/uuid_attribute/maintainability)
-
 [![Test Coverage](https://api.codeclimate.com/v1/badges/54be49d487b928c9bc8f/test_coverage)](https://codeclimate.com/github/iugu/uuid_attribute/test_coverage)
-
 ![Test Builds](https://github.com/iugu/uuid_attribute/actions/workflows/test.yml/badge.svg)
+
+# UUidAttribute
 
 ## Installation
 
