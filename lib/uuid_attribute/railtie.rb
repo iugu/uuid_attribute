@@ -51,16 +51,15 @@ module UuidAttribute
           end
         end
       rescue ActiveRecord::NoDatabaseError
-        puts "NO DATABASE"
         false
       else
-        puts "CONFIGURE BINARY"
         true
       end
     end
 
     config.after_initialize do
-      puts "REGISTERING UUID"
+      return if ARGV.include? "assets:precompile"
+
       ActiveRecord::Type.register(:uuid, ::UuidAttribute::UUID)
 
       configure_binary_ids if UuidAttribute.auto_detect_binary_ids
