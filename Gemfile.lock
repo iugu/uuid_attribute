@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    uuid_attribute (0.9.6)
+    uuid_attribute (0.9.7)
       activemodel (>= 5.2)
       activerecord (>= 5.2)
 
