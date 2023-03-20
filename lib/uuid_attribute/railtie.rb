@@ -58,16 +58,16 @@ module UuidAttribute
     end
 
     config.after_initialize do
-      return if ARGV.include? "assets:precompile"
+      unless ARGV.include? "assets:precompile"
+        ActiveRecord::Type.register(:uuid, ::UuidAttribute::UUID)
 
-      ActiveRecord::Type.register(:uuid, ::UuidAttribute::UUID)
+        configure_binary_ids if UuidAttribute.auto_detect_binary_ids
 
-      configure_binary_ids if UuidAttribute.auto_detect_binary_ids
-
-      if UuidAttribute.default_primary_id
-        # Configure UUID as Default Primary Key
-        Rails&.application&.config&.generators do |g|
-          g.orm :active_record, primary_key_type: "binary, limit: 16"
+        if UuidAttribute.default_primary_id
+          # Configure UUID as Default Primary Key
+          Rails&.application&.config&.generators do |g|
+            g.orm :active_record, primary_key_type: "binary, limit: 16"
+          end
         end
       end
     end
