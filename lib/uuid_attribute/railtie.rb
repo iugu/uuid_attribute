@@ -58,8 +58,7 @@ module UuidAttribute
     end
 
     config.after_initialize do
-      puts "ARGV: #{ARGV.inspect}"
-      unless ARGV.include? "assets:precompile"
+      unless ARGV.include? "assets:"
         ActiveRecord::Type.register(:uuid, ::UuidAttribute::UUID)
 
         configure_binary_ids if UuidAttribute.auto_detect_binary_ids
