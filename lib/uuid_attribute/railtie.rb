@@ -47,13 +47,20 @@ module UuidAttribute
 
             default = nil
             default = -> { SecureRandom.uuid } if att.eql? "id"
-            model.define_attribute att, ::UuidAttribute::UUID.new, default: default
+            model.attribute att, ::UuidAttribute::UUID.new, default: default
           end
         end
+      rescue ActiveRecord::NoDatabaseError
+        puts "NO DATABASE"
+        false
+      else
+        puts "CONFIGURE BINARY"
+        true
       end
     end
 
     config.after_initialize do
+      puts "REGISTERING UUID"
       ActiveRecord::Type.register(:uuid, ::UuidAttribute::UUID)
 
       configure_binary_ids if UuidAttribute.auto_detect_binary_ids

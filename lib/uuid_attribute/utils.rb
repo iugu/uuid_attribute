@@ -5,7 +5,7 @@ module UuidAttribute
   class Utils
     class << self
       def normalize(uuid_string)
-        uuid_string.gsub("-", "").upcase
+        uuid_string&.gsub("-", "")&.upcase
       end
 
       def hex_from_binary(bytes)
@@ -22,6 +22,8 @@ module UuidAttribute
 
         case str.length
         when 32
+          format_uuid(str)
+        when 34
           format_uuid(str)
         when 16
           format_uuid(hex_from_binary(str))
