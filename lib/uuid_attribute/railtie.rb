@@ -57,11 +57,11 @@ module UuidAttribute
       end
     end
 
-    config.after_initialize do
+    config.to_prepare do
       unless ARGV.join(" ").include? "assets:"
         ActiveRecord::Type.register(:uuid, ::UuidAttribute::UUID)
 
-        configure_binary_ids if UuidAttribute.auto_detect_binary_ids
+        ::UuidAttribute::Railtie::configure_binary_ids if UuidAttribute.auto_detect_binary_ids
 
         if UuidAttribute.default_primary_id
           # Configure UUID as Default Primary Key
