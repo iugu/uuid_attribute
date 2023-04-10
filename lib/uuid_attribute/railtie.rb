@@ -32,6 +32,13 @@ module UuidAttribute
 
         models -= %w[ActiveRecord Concern]
 
+        begin
+          ActiveStorage::VariantRecord.new
+          ActiveStorage::Attachment.new
+          ActiveStorage::Blob.new
+        rescue
+        end
+
         models.each(&:constantize)
         all_active_record_classes
       end
@@ -58,18 +65,18 @@ module UuidAttribute
     end
 
     config.to_prepare do
-      unless ARGV.join(" ").include? "assets:"
-        ActiveRecord::Type.register(:uuid, ::UuidAttribute::UUID)
+      ActiveRecord::Type.register(:uuid, ::UuidAttribute::UUID)
 
-        ::UuidAttribute::Railtie::configure_binary_ids if UuidAttribute.auto_detect_binary_ids
+      ::UuidAttribute::Railtie::configure_binary_ids if UuidAttribute.auto_detect_binary_ids
 
-        if UuidAttribute.default_primary_id
-          # Configure UUID as Default Primary Key
-          Rails&.application&.config&.generators do |g|
-            g.orm :active_record, primary_key_type: "binary, limit: 16"
-          end
+      if UuidAttribute.default_primary_id
+        # Configure UUID as Default Primary Key
+        Rails&.application&.config&.generators do |g|
+          g.orm :active_record, primary_key_type: "binary, limit: 16"
         end
       end
+    rescue ActiveRecord::StatementInvalid => e
+      Rails.logger.info("Database doesn't exist yet.")
     end
   end
 end
