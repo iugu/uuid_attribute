@@ -75,8 +75,8 @@ module UuidAttribute
           g.orm :active_record, primary_key_type: "binary, limit: 16"
         end
       end
-    rescue ActiveRecord::StatementInvalid => e
-      Rails.logger.info("Database doesn't exist yet.")
+    rescue ActiveRecord::StatementInvalid, ActiveRecord::DatabaseConnectionError
+      Rails.logger.debug("Ignoring database on uuid init.")
     end
   end
 end
