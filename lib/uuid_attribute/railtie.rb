@@ -26,7 +26,7 @@ module UuidAttribute
       def list_models
         models = []
         Dir["#{Rails.root}/app/models/*"].each do |file|
-          model = File.basename(file, ".*").classify
+          model = File.basename(file, ".*").camelcase
           models << model unless models.include?(model)
         end
 
@@ -39,7 +39,10 @@ module UuidAttribute
         rescue
         end
 
-        models.each(&:constantize)
+        models.each do |m|
+          Object.const_get(m)
+        rescue NameError
+        end
         all_active_record_classes
       end
 
