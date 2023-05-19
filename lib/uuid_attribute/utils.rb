@@ -17,6 +17,7 @@ module UuidAttribute
       end
 
       def parse(str)
+        return format_uuid(str.hex) if str.is_a?(UUID)
         return nil if str.length.zero?
         return str if str.length == 36
 

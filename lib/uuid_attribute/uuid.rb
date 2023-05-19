@@ -1,28 +1,22 @@
 # frozen_string_literal: true
-
 module UuidAttribute
   # UUID Attribute
-  class UUID < ActiveModel::Type::Binary
-    def type
-      :uuid
+  class UUID
+    def initialize(value)
+      @hex = Utils.normalize(Utils.parse(value))
+      @shorten = Utils.shorten(@hex)
     end
 
-    def serialize(value)
-      return if value.blank?
-
-      ActiveRecord::Type::Binary::Data.new(
-        Utils.raw_bytes(Utils.normalize(Utils.parse(value)))
-      )
+    def to_s
+      @shorten
     end
 
-    def deserialize(value)
-      return nil if value.nil?
-
-      Utils.shorten(Utils.parse(value.to_s))
+    def hex
+      @hex
     end
 
-    def cast(value)
-      deserialize(value)
+    def raw
+      UuidAttribute::Utils.raw_bytes(@hex)
     end
   end
 end
