@@ -6,15 +6,15 @@ gemspec
 
 gem "rake", "~> 13.0"
 
-gem "actionpack", "~> 7.0.0"
+gem "actionpack", "~> 7.1.0"
 gem "activemodel", "~> 7.0.0"
 gem "activerecord", "~> 7.0.0"
 gem "byebug"
 gem "minitest", "~> 5.0"
 gem "mysql2"
 gem "postgresql"
-gem "rails", "~> 7.0.0"
-gem "railties", "~> 7.0.0"
+gem "rails", "~> 7.1.0"
+gem "railties", "~> 7.1.0"
 gem "rubocop", "~> 1.21"
 gem "rubocop-minitest"
 gem "rubocop-rails"
